@@ -6,20 +6,20 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0001_initial'),
+        ("main", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='device',
-            name='humidity',
+            model_name="device",
+            name="humidity",
         ),
         migrations.RemoveField(
-            model_name='device',
-            name='manual_mode',
+            model_name="device",
+            name="manual_mode",
         ),
         migrations.RemoveField(
-            model_name='device',
-            name='temperature',
+            model_name="device",
+            name="temperature",
         ),
     ]
