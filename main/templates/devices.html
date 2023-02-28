@@ -47,11 +47,18 @@
             </div>
         </div>
         <script>
+            var dvc = "{{ device.device_id}}";
             var moi = "{{ device.analog_input}}";
             moi = moi.match(/\d+(?:\.\d+)?/g).map(Number);
+            // console.log(moi);
             var labels = []
             var lr = " More than an hour ago"
-
+            for (let i = 0; i < moi.length; i++) {
+                if (moi[i] < 55) {
+                    lr = " " + String(5 * (moi.length - i - 1)) + " sec ago"
+                }
+                labels.push([i])
+            }
             document.getElementById(dvc).innerHTML = document.getElementById(dvc).innerHTML + lr
             var ctxL = document.getElementById("lineChart-" + dvc).getContext('2d');
             var myLineChart = new Chart(ctxL, {
