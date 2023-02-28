@@ -17,8 +17,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECURE_SSL_REDIRECT = True
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -142,5 +140,15 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Activate Django-Heroku.
 # django_heroku.settings(locals())
+
+CORS_REPLACE_HTTPS_REFERER = False
+HOST_SCHEME = "http://"
+SECURE_PROXY_SSL_HEADER = None
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_HSTS_SECONDS = None
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_FRAME_DENY = False
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
