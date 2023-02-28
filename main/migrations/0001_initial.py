@@ -6,20 +6,42 @@ import main.models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Device',
+            name="Device",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('user', django.contrib.postgres.fields.ArrayField(base_field=models.IntegerField(), blank=True, default=list, size=None)),
-                ('device_id', models.CharField(max_length=100)),
-                ('analog_input', django.contrib.postgres.fields.ArrayField(base_field=models.FloatField(), blank=True, default=main.models.get_default_array, size=None)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "user",
+                    django.contrib.postgres.fields.ArrayField(
+                        base_field=models.IntegerField(),
+                        blank=True,
+                        default=list,
+                        size=None,
+                    ),
+                ),
+                ("device_id", models.CharField(max_length=100)),
+                (
+                    "analog_input",
+                    django.contrib.postgres.fields.ArrayField(
+                        base_field=models.FloatField(),
+                        blank=True,
+                        default=main.models.get_default_array,
+                        size=None,
+                    ),
+                ),
             ],
         ),
     ]

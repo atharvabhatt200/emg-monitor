@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
+
+
 # Create your views here.
 def loginView(request):
     context = {
@@ -9,7 +11,7 @@ def loginView(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
-        context["sound"]="warning"
+        context["sound"] = "warning"
         user = authenticate(username=username, password=password)
         print(user)
         if user is not None:
@@ -52,6 +54,7 @@ def registerView(request):
             return render(request, "register.html", context)
     return render(request, "register.html", context)
 
+
 def editView(request):
     context = {
         "visibility": "none",
@@ -62,7 +65,7 @@ def editView(request):
         name = request.POST.get("name")
         username = request.POST.get("username")
         email = request.POST.get("email")
-        user=User.objects.get(username=request.user.username)
+        user = User.objects.get(username=request.user.username)
         user.first_name = name
         user.username = username
         user.email = email
