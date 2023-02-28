@@ -1,1 +1,1 @@
-web: python manage.py migrate && python manage.py collectstatic && gunicorn emg_monitor.wsgi
+web: python manage.py migrate && python manage.py collectstatic --noinput && gunicorn emg_monitor.wsgi
