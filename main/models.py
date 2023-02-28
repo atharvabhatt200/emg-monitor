@@ -15,7 +15,7 @@ class Device(models.Model):
         default=list,
     )
     device_id = models.CharField(max_length=100)
-    moisture_level = ArrayField(
+    analog_input = ArrayField(
         models.FloatField(),
         blank=True,
         default=get_default_array,
