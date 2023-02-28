@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="alert alert-danger mt-0 mb-0" role="alert" style="display:{{visibility}};">
+    <strong>Same credentials are in database!</strong> Try New.
+</div>
+<form class="inputform" method="post" action="/edit">
+    {% csrf_token %}
+    <h1 class="heading">Update form</h1>
+    <div><label for="name" class="labels">Name</label></div>
+    <div><input value="{{user.first_name}}" type="text" id="inputName" name="name" class="inputs" placeholder="Name" required autofocus></div>
+    <div><label for="username" class="labels">Username</label></div>
+    <div><input value="{{user.username}}" type="text" id="inputUsername" name="username" class="inputs" placeholder="Username" required
+        autofocus></div>
+    <div><label for="email" class="labels">Email</label></div>
+    <div><input value="{{user.email}}" type="email" id="inputEmail" name="email" class="inputs" placeholder="Email" required autofocus></div>
+    <button class="submitbtn" type="submit">Update</button>
+</form>
+{% endblock content %}

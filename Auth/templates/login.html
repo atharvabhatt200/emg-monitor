@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="alert alert-danger mt-0 mb-0" role="alert" style="display:{{visibility}};">
+    <strong>Invalid credentials!</strong> Try Again.
+</div>
+<form class="inputform" method="post" action="/login">
+    {% csrf_token %}
+    <h1 class="heading">Please Login</h1>
+    <div><label for="inputusername" class="labels">&#129333;</label>
+    <input class="inputs" type="text" id="inputusername" name="username" placeholder="&#128274; Username" required autofocus></div>
+    <div><label for="inputpassword" class="labels">&#x1F511;</label>
+    <input  class="inputs" type="password" id="inputpassword" name="password" placeholder="&#x1F511; Password" required></div>
+    <button class="submitbtn" type="submit">Sign in</button>
+</form>
+{% endblock content %}

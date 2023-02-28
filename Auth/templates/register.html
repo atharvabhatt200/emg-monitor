@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="alert alert-danger mt-0 mb-0" role="alert" style="display:{{visibility}};">
+    <strong>Same credentials are in database!</strong> Login using it.
+</div>
+<form class="inputform" method="post" action="/register">
+    {% csrf_token %}
+    <h1 class="heading">Please Register</h1>
+    <div><label for="name" class="labels">Name</label></div>
+    <div><input type="text" id="inputName" name="name" class="inputs" placeholder="Name" required autofocus></div>
+    <div><label for="username" class="labels">Username</label></div>
+    <div><input type="text" id="inputUsername" name="username" class="inputs" placeholder="Username" required
+        autofocus></div>
+    <div><label for="email" class="labels">Email</label></div>
+    <div><input type="email" id="inputEmail" name="email" class="inputs" placeholder="Email" required autofocus></div>
+    <div><label for="inputPassword" class="labels">Password</label></div>
+    <div><input type="password" id="inputPassword" name="password" class="inputs" placeholder="Password"
+        required></div>
+    <button class="submitbtn" type="submit">Register</button>
+</form>
+{% endblock content %}

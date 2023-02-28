@@ -1,0 +1,77 @@
+form {
+    background-color: #4723D9;
+    max-width: 90% !important;
+}
+
+.inputform {
+    color: white;
+    display: inline-block;
+    border: 2px solid black;
+    margin-top: 50px;
+    padding: 10px;
+}
+
+.inputform div {
+    text-align: left;
+    margin: 30px 20px;
+    max-width: 90% !important;
+}
+
+.heading {
+    margin-bottom: 50px;
+    border-bottom: 2px solid white;
+}
+
+.labels {
+    font-size: 30px;
+    margin: 10px;
+    display: none;
+}
+
+.inputs {
+    max-width: 100% !important;
+    /* margin: 10px; */
+    font-size: 25px;
+    background-color: transparent;
+    border: none;
+    border: 2px solid cyan;
+    padding: 10px;
+    color: white;
+}
+
+.submitbtn {
+    width: 100%;
+    margin: 5px;
+    border-color: cyan;
+    color: cyan;
+    background-color: black;
+    font-size: 25px;
+    padding: 10px;
+}
+
+.submitbtn:hover {
+    border: 2px solid black;
+    color: black;
+    background-color: cyan;
+}
+
+.links {
+    margin-top: 50px;
+}
+
+.links img:hover {
+    filter: none;
+    background-color: cyan;
+    border-color: cyan;
+}
+
+.links img {
+    filter: invert(90%) sepia(28%) saturate(3319%) hue-rotate(118deg) brightness(99%) contrast(107%);
+    /* filter: invert(8%) sepia(94%) saturate(7088%) hue-rotate(248deg) brightness(102%) contrast(149%); */
+    /* filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(337deg) brightness(104%) contrast(102%); */
+    margin: 20px;
+    padding: 5px;
+    border: 5px solid black;
+    border-radius: 100px;
+    width: 50px;
+}

@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm" style="max-width: 1200px;">
+            <img style="width: 100%;"
+                src="https://user-images.githubusercontent.com/78701055/165725617-1aec864b-7b75-4e90-aa0f-74c6161b00ca.png">
+            <br><br>
+            <h3><b>About the project:</b>
+            </h3>
+            <hr>
+            <h6>
+
+                It is the IoT Based Smart Agriculture & Automatic Irrigation System with Nodemcu ESP8266.
+                Agriculture plays a vital role in the development of agricultural countries. Some issues
+                concerning agriculture have been always hindering the development of the country. Consequently,
+                the only solution to this problem is smart agriculture by modernizing the current traditional
+                methods of agriculture.
+                <br><br>
+                Hence the method is making agriculture smart using automation and IoT technologies. Internet of
+                Things (IoT) enables various applications of crop growth monitoring and selection, automatic
+                irrigation decision support, etc. We proposed ESP8266 IoT Automatic irrigation system to
+                modernize and improve the productivity of the crop.
+                <br><br>
+                This project explains how to make IoT Smart Agriculture with Automatic Irrigation System using
+                some simple sensors that are available in the market. We will use Soil Moisture Sensor to
+                measure moisture content present in the soil. Similarly to measure Air Temperature and Humidity,
+                we prefer DHT11 Humidity Temperature Sensor. Using a 5V Power relay we will control the Water
+                Pump. Whenever the sensor detects a low quantity of moisture in the soil, the motor turns on
+                automatically. Hence, will automatically irrigate the field. Once the soil becomes wet, the
+                motor turns off. You can monitor all this happening remotely via our website online from any
+                part of the world.
+            </h6>
+
+            <br>
+            <h3><b>Hardware Components used:</b>
+            </h3>
+            <hr>
+            <div class="table-responsive">
+
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td><img height="100px" width="100px"
+                                    src="https://user-images.githubusercontent.com/78701055/165717011-2a3ec22e-2812-4dbf-9073-11a4ed1ea21e.jpg"
+                                    alt=""></td>
+                            <td><img height="100px" width="100px"
+                                    src="https://user-images.githubusercontent.com/78701055/165716988-27039939-38cd-4655-b87b-a9fa601956b8.jpg"
+                                    alt=""></td>
+                            <td><img height="100px" width="100px"
+                                    src="https://user-images.githubusercontent.com/78701055/165717001-d27e5014-dbd8-402f-9706-3cf2bffdac07.jpg"
+                                    alt=""></td>
+                            <td><img height="100px" width="100px"
+                                    src="https://user-images.githubusercontent.com/78701055/165716965-ab8d125a-3fb3-4e2b-9265-11998659722a.jpg"
+                                    alt=""></td>
+                            <td><img height="100px" width="100px"
+                                    src="https://user-images.githubusercontent.com/78701055/165717195-119f7bd5-3436-4be9-974b-831ddf9f1141.jpeg"
+                                    alt=""></td>
+                            <td><img height="100px" width="100px"
+                                    src="https://user-images.githubusercontent.com/78701055/165722571-47ea42bf-d9ea-4c80-bcc8-b8947c829673.png"
+                                    alt=""></td>
+                            <td><img height="100px" width="100px"
+                                    src="https://user-images.githubusercontent.com/78701055/165722579-5a57fc60-37b1-4fae-9606-eb36b6851a13.jpg"
+                                    alt=""></td>
+                        </tr>
+                        <tr style="font-size: small;">
+                            <td>ESP8266</td>
+                            <td>Soil Moisture Sensor</td>
+                            <td>Air Temperature and Humidity Sensor</td>
+                            <td>5V Power Relay</td>
+                            <td>Water Pump</td>
+                            <td>12V battery</td>
+                            <td>12V to 5v converter</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+            <h3><b>Final Circuit:</b>
+            </h3>
+            <hr>
+            <img style="max-width: 800px; width: 80vw;"
+                src="https://user-images.githubusercontent.com/78701055/165721822-8ce9857e-6f89-431b-96a5-bb17adb5e330.jpeg">
+        </div>
+        <div class="col-sm" style="margin-top: 50px">
+            <div id="profile-doc" class="card sticky-top" style="top:100px; border: none;">
+                <h1 id="profile">PROFILE <a href="edit"><i class='bx bx-edit nav_icon'
+                            style="font-size: 0.9em;"></i></a>
+                </h1>
+                <hr>
+                <div class="profileContainer">
+                    <ul style="list-style-type: none;">
+                        <li>
+                            <h4 id="profile-user-name" style="font-weight: 600;">Name : {{name}}</h4>
+                        </li>
+                        <li>
+                            <h4 id="profile-user-username">Username: {{username}}</h4>
+                        </li>
+                        <li>
+                            <h4 id="profile-email">Email: {{email}}</h4>
+                        </li>
+                        <li>
+                            <h4 id="profile-devies">Devices: {{devices}}</h4>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary btn-rounded mt-2" onclick="add_device()"
+                                style="width:190px;text-align:center;">Add New Device</button>
+                            <a href="devices">
+                                <button class="btn btn-outline-primary btn-rounded mt-2"
+                                    style="width:190px;text-align:center;">View All Devices</button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-primary btn-rounded mt-2" href="#profile-doc" id="show-btn"
+            style="width:max-content;font-size:small; text-align:center; position: fixed; bottom:50px; right: 5px;">
+            &#8595; Profile
+        </a>
+    </div>
+    <script>
+        function add_device() {
+            id = prompt("Enter Device ID");
+            if (id != null) {
+                window.location.href = "add_device/" + id;
+            }
+        }
+    </script>
+</div>
+{% endblock content%}
