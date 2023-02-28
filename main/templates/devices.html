@@ -51,12 +51,7 @@
             moi = moi.match(/\d+(?:\.\d+)?/g).map(Number);
             var labels = []
             var lr = " More than an hour ago"
-            for (let i = 0; i < temp.length; i++) {
-                if (moi[i] < 55) {
-                    lr = " " + String(5 * (temp.length - i - 1)) + " sec ago"
-                }
-                labels.push([i])
-            }
+
             document.getElementById(dvc).innerHTML = document.getElementById(dvc).innerHTML + lr
             var ctxL = document.getElementById("lineChart-" + dvc).getContext('2d');
             var myLineChart = new Chart(ctxL, {
