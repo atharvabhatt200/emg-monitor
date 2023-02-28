@@ -15,18 +15,6 @@
                         <p id={{device.device_id}} class="text-uppercase small mb-2"><strong>Last Run:</strong></p>
                         <h5 class="font-weight-bold mb-0">ID:{{device.device_id}}</h5>
                     </div>
-                    <div class="col-md-auto">
-                        <div class="btn-group-toggle" data-toggle="buttons">
-                            <form method="post" name="form1" action="/manual_mode/{{device.device_id}}"
-                                style="background-color: white; border: none;">
-                                {% csrf_token %}
-                                <label class="btn btn-warning active float-right mt-2">
-                                    <input type="checkbox" onChange="this.form.submit()" {% if device.manual_mode %}
-                                        checked {% endif %} autocomplete="off"> Manual Run
-                                </label>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -43,16 +31,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <p class="text-uppercase small mb-2"><strong>Temperature:</strong></p>
-                        <h5 class="font-weight-bold mb-0">{{device.temperature|last}}</h5>
-                    </div>
-                    <div class="col-sm">
-                        <p class="text-uppercase small mb-2"><strong>Humidity:</strong></p>
-                        <h5 class="font-weight-bold mb-0">{{device.humidity|last}}</h5>
-                    </div>
-                    <div class="col-sm">
-                        <p class="text-uppercase small mb-2"><strong>Moisture:</strong></p>
-                        <h5 class="font-weight-bold mb-0">{{device.moisture_level|last}}</h5>
+                        <p class="text-uppercase small mb-2"><strong>Analog Input:</strong></p>
+                        <h5 class="font-weight-bold mb-0">{{device.analog_input|last}}</h5>
                     </div>
                     <div class="col-md-auto">
                         <div class="btn-group-toggle" data-toggle="buttons">
@@ -68,19 +48,14 @@
         </div>
         <script>
             var dvc = "{{ device.device_id}}";
-            var temp = "{{ device.temperature}}";
-            // temp = temp;
-            temp = temp.match(/\d+(?:\.\d+)?/g).map(Number)
-
-            var hum = "{{ device.humidity}}";
-            hum = hum.match(/\d+(?:\.\d+)?/g).map(Number);
-            var moi = "{{ device.moisture_level}}";
+            var moi = "{{ device.analog_input}}";
             moi = moi.match(/\d+(?:\.\d+)?/g).map(Number);
+            // console.log(moi);
             var labels = []
             var lr = " More than an hour ago"
-            for (let i = 0; i < temp.length; i++) {
+            for (let i = 0; i < moi.length; i++) {
                 if (moi[i] < 55) {
-                    lr = " " + String(5 * (temp.length - i - 1)) + " sec ago"
+                    lr = " " + String(5 * (moi.length - i - 1)) + " sec ago"
                 }
                 labels.push([i])
             }
@@ -92,23 +67,7 @@
                     labels: labels,
                     datasets: [
                         {
-                            label: "Temperature",
-                            data: temp,
-                            backgroundColor: ['rgba(105, 0, 132, .2)',],
-                            borderColor: ['rgba(200, 99, 132, .7)'
-                                ,],
-                            borderWidth: 2
-                        },
-                        {
-                            label: "Humidity",
-                            data: hum,
-                            backgroundColor:
-                                ['rgba(0, 137, 132, .2)',],
-                            borderColor: ['rgba(0, 10, 130, .7)',],
-                            borderWidth: 2
-                        },
-                        {
-                            label: "Moisture",
+                            label: "ANALOG INPUT",
                             data: moi,
                             backgroundColor:
                                 ['rgba(14, 198, 14, .2)',],

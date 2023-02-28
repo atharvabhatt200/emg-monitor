@@ -1,5 +1,7 @@
 from django.urls import path
-from autherization.views import loginView, logoutView, registerView, editView
+
+# now import the views.py file into this code
+from Auth.views import loginView, logoutView, registerView, editView
 
 urlpatterns = [
     path("login", loginView, name="login"),

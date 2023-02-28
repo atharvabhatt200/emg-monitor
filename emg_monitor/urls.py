@@ -1,7 +1,7 @@
-"""JARVIS URL Configuration
+"""emg_monitor URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.0/topics/http/urls/
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,14 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls.static import static
-from django.conf import settings
 
 urlpatterns = [
-    path("", include("main.urls")),
-    path("", include("autherization.urls")),
     path("admin/", admin.site.urls),
-    path("accounts/", include("django.contrib.auth.urls")),
+    path("", include("Auth.urls")),
+    path("", include("main.urls")),
 ]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

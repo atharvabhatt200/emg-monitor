@@ -3,7 +3,6 @@ from .models import Device
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
 
 
 # Create your views here.
@@ -15,7 +14,7 @@ def new_data(request, id, m):
         device.analog_input.pop(0)
     print(m)
     device.save()
-    return HttpResponse('OK', status=200)
+    return JsonResponse({"status": "ok"})
 
 
 def index(request):
