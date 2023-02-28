@@ -9,9 +9,9 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def new_data(request, id, m):
     device = get_object_or_404(Device, device_id=id)
-    device.moisture_level.append(min(150, m))
-    while len(device.moisture_level) > 50:
-        device.moisture_level.pop(0)
+    device.analog_input.append(min(150, m))
+    while len(device.analog_input) > 50:
+        device.analog_input.pop(0)
     print(m)
     device.save()
     return JsonResponse({"status": "ok"})
