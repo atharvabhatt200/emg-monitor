@@ -71,6 +71,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "emg_monitor.wsgi.application"
+SECURE_SSL_REDIRECT = False
 
 
 # Database
