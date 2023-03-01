@@ -71,8 +71,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "emg_monitor.wsgi.application"
-SECURE_SSL_REDIRECT = False
-APPEND_SLASH = False
+SECURE_SSL_REDIRECT = True
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
