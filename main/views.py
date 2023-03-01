@@ -3,16 +3,26 @@ from .models import Device
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 # Create your views here.
 @csrf_exempt
-def new_data(request, id, m):
+def new_data(request, id):
     device = get_object_or_404(Device, device_id=id)
-    device.analog_input.append(min(150, m))
+    # device.analog_input.append(min(150, m))
+    json_data = request.body.decode('utf-8')
+    data_dict = json.loads(json_data)
+    
+    # iterate over the values in the dictionary
+    for value in data_dict.values():
+        # do something with each value
+        device.analog_input.append(value);
+
     while len(device.analog_input) > 50:
         device.analog_input.pop(0)
-    print(m)
+
+    # print(m)
     device.save()
     return JsonResponse({"status": "ok"})
 
