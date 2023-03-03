@@ -90,6 +90,10 @@
           options: { responsive: true },
         });
 
+        myLineChart.data.datasets[0].data = moi;
+        myLineChart.data.labels = labels;
+        myLineChart.update();
+
         setTimeout(updateChart, 1000);
       }
 
