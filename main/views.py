@@ -78,5 +78,6 @@ def get_chart_data(request, device_id):
     if request.user.is_authenticated is False:
         return redirect("/login")
     devices = Device.objects.filter(user__contains=[request.user.id], device_id=device_id)
-    # print(device_id)
+    print(device_id)
+    print(devices)
     return JsonResponse({"analog_input": devices.first().analog_input})
