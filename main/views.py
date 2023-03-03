@@ -13,14 +13,16 @@ def new_data(request, id):
     # device.analog_input.append(min(150, m))
     json_data = request.body.decode('utf-8')
     data_dict = json.loads(json_data)
+
+    device.analog_input.clear()
     
     # iterate over the values in the dictionary
     for value in data_dict.values():
         # do something with each value
-        device.analog_input.append(value);
+        device.analog_input.append(value)
 
-    while len(device.analog_input) > 50:
-        device.analog_input.pop(0)
+    # while len(device.analog_input) > 2000:
+    #     device.analog_input.pop(0)
 
     # print(m)
     device.save()
