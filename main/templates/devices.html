@@ -9,9 +9,9 @@
       <div class="container">
         <div class="row">
           <div class="col-sm">
-            <p id="{{device.device_id}}" class="text-uppercase small mb-2">
+            <!-- <p id="{{device.device_id}}" class="text-uppercase small mb-2">
               <strong>Last Run:</strong>
-            </p>
+            </p> -->
             <h5 class="font-weight-bold mb-0">ID:{{device.device_id}}</h5>
           </div>
         </div>
@@ -70,8 +70,8 @@
           }
           labels.push('');
         }
-        document.getElementById(dvc).innerHTML =
-          document.getElementById(dvc).innerHTML + lr;
+        // document.getElementById(dvc).innerHTML =
+        //   document.getElementById(dvc).innerHTML + lr;
         var ctxL = document.getElementById("lineChart-" + dvc).getContext("2d");
         var myLineChart = new Chart(ctxL, {
           type: "line",
