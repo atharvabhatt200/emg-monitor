@@ -66,12 +66,13 @@
           url: "/get-chart-data/" + dvc,
           dataType: "json",
           success: function (data) {
+            console.log(data);
             var moi = data.analog_input;
             var labels = [];
             for (let i = 0; i < moi.length; i++) {
               labels.push("");
             }
-            
+
             // get the chart object
             var ctxL = document
               .getElementById("lineChart-" + dvc)
