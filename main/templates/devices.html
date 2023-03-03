@@ -66,18 +66,33 @@
           url: "/get-chart-data/" + dvc,
           dataType: "json",
           success: function (data) {
-            console.log(data);
+            // console.log(data);
             var moi = data.analog_input;
             var labels = [];
             for (let i = 0; i < moi.length; i++) {
-              labels.push("");
+              labels.push(" ");
             }
 
             // get the chart object
             var ctxL = document
               .getElementById("lineChart-" + dvc)
               .getContext("2d");
-            var myLineChart = Chart.instances["lineChart-" + dvc];
+            var myLineChart = new Chart(ctxL, {
+              type: "line",
+              data: {
+                labels: labels,
+                datasets: [
+                  {
+                    label: "ANALOG INPUT",
+                    data: moi,
+                    backgroundColor: ["rgba(14, 198, 14, .2)"],
+                    borderColor: ["rgba(14, 198, 14, .7)"],
+                    borderWidth: 2,
+                  },
+                ],
+              },
+              options: { responsive: true },
+            });
 
             // update the chart's data with the new data
             myLineChart.data.datasets[0].data = moi;
