@@ -63,22 +63,15 @@
 
         // make an AJAX request to fetch the new data from the backend
         $.ajax({
-          url: "/get-chart-data",
-          data: {
-            device_id: dvc,
-          },
+          url: "/get-chart-data/" + dvc,
           dataType: "json",
           success: function (data) {
             var moi = data.analog_input;
             var labels = [];
-            var lr = " More than an hour ago";
             for (let i = 0; i < moi.length; i++) {
-              if (moi[i] < 55) {
-                lr = " " + String(5 * (moi.length - i - 1)) + " sec ago";
-              }
               labels.push("");
             }
-
+            
             // get the chart object
             var ctxL = document
               .getElementById("lineChart-" + dvc)
