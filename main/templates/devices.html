@@ -90,19 +90,23 @@
                     borderWidth: 2,
                   },
                 ],
-                options: {
-                  elements: {
-                    point: {
-                      pointBorderWidth: 0,
-                    },
+              },
+              options: {
+                elements: {
+                  point: {
+                    pointBorderWidth: 0,
                   },
                 },
+                responsive: true,
+                animation: {
+                  duration: 0, // general animation time
+                },
+                hover: {
+                  animationDuration: 0, // duration of animations when hovering an item
+                },
+                responsiveAnimationDuration: 0, // animation duration after a resize
               },
-              options: { responsive: true },
             });
-
-            chart.options.animation = false;
-            chart.options.transitions.active.animation.duration = 0; // disables the animation for 'active' mode
 
             // update the chart's data with the new data
             myLineChart.data.datasets[0].data = moi;
