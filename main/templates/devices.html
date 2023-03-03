@@ -58,41 +58,38 @@
     </div>
     <script>
       function updateChart() {
-        var dvc = "{{ device.device_id}}";
-        var moi = "{{ device.analog_input}}";
-        moi = moi.match(/\d+(?:\.\d+)?/g).map(Number);
-        // console.log(moi);
-        var labels = [];
-        var lr = " More than an hour ago";
-        for (let i = 0; i < moi.length; i++) {
-          if (moi[i] < 55) {
-            lr = " " + String(5 * (moi.length - i - 1)) + " sec ago";
-          }
-          labels.push('');
-        }
-        // document.getElementById(dvc).innerHTML =
-        //   document.getElementById(dvc).innerHTML + lr;
-        var ctxL = document.getElementById("lineChart-" + dvc).getContext("2d");
-        var myLineChart = new Chart(ctxL, {
-          type: "line",
-          data: {
-            labels: labels,
-            datasets: [
-              {
-                label: "ANALOG INPUT",
-                data: moi,
-                backgroundColor: ["rgba(14, 198, 14, .2)"],
-                borderColor: ["rgba(14, 198, 14, .7)"],
-                borderWidth: 1,
-              },
-            ],
-          },
-          options: { responsive: true },
-        });
+        var dvc = "{{ device.device_id }}";
 
-        myLineChart.data.datasets[0].data = "{{ device.analog_input}}";
-        myLineChart.data.labels = labels;
-        myLineChart.update();
+        // make an AJAX request to fetch the new data from the backend
+        $.ajax({
+          url: "/get-chart-data/",
+          data: {
+            device_id: dvc,
+          },
+          dataType: "json",
+          success: function (data) {
+            var moi = data.analog_input;
+            var labels = [];
+            var lr = " More than an hour ago";
+            for (let i = 0; i < moi.length; i++) {
+              if (moi[i] < 55) {
+                lr = " " + String(5 * (moi.length - i - 1)) + " sec ago";
+              }
+              labels.push("");
+            }
+
+            // get the chart object
+            var ctxL = document
+              .getElementById("lineChart-" + dvc)
+              .getContext("2d");
+            var myLineChart = Chart.instances["lineChart-" + dvc];
+
+            // update the chart's data with the new data
+            myLineChart.data.datasets[0].data = moi;
+            myLineChart.data.labels = labels;
+            myLineChart.update();
+          },
+        });
 
         setTimeout(updateChart, 1000);
       }
