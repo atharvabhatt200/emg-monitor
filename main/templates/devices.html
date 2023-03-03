@@ -90,9 +90,18 @@
                     borderWidth: 2,
                   },
                 ],
+                options: {
+                  elements: {
+                    point: {
+                      pointBorderWidth: 0,
+                    },
+                  },
+                },
               },
               options: { responsive: true },
             });
+
+            chart.options.transitions.active.animation.duration = 0; // disables the animation for 'active' mode
 
             // update the chart's data with the new data
             myLineChart.data.datasets[0].data = moi;
