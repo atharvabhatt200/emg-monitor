@@ -80,4 +80,5 @@ def get_chart_data(request, id):
     devices = Device.objects.filter(user__contains=[request.user.id], device_id=id)
     print(id)
     print(devices)
-    return JsonResponse({"analog_input": devices.first().analog_input})
+    analog_input = devices.first().analog_input
+    return JsonResponse({"analog_input": analog_input})
