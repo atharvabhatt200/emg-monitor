@@ -68,7 +68,7 @@
           if (moi[i] < 55) {
             lr = " " + String(5 * (moi.length - i - 1)) + " sec ago";
           }
-          labels.push([i]);
+          labels.push('');
         }
         document.getElementById(dvc).innerHTML =
           document.getElementById(dvc).innerHTML + lr;
@@ -83,14 +83,14 @@
                 data: moi,
                 backgroundColor: ["rgba(14, 198, 14, .2)"],
                 borderColor: ["rgba(14, 198, 14, .7)"],
-                borderWidth: 2,
+                borderWidth: 1,
               },
             ],
           },
           options: { responsive: true },
         });
 
-        myLineChart.data.datasets[0].data = moi;
+        myLineChart.data.datasets[0].data = "{{ device.analog_input}}";
         myLineChart.data.labels = labels;
         myLineChart.update();
 
