@@ -73,3 +73,10 @@ def delete_device(request, id):
     else:
         device.save()
     return redirect("/devices")
+
+def get_chart_data(request):
+    device_id = request.GET.get("device_id")
+    if request.user.is_authenticated is False:
+        return redirect("/login")
+    devices = Device.objects.filter(user__contains=[request.user.id], device_id=device_id)
+    return JsonResponse({"analog_input": devices.first().analog_input})
