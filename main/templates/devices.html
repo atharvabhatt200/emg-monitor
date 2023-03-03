@@ -1,87 +1,100 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <div class="card-group">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    <!-- Card -->
-    {% for device in devices %}
-    <div class="card" style="width: 70rem; max-width: 80vw;">
-
-        <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <p id={{device.device_id}} class="text-uppercase small mb-2"><strong>Last Run:</strong></p>
-                        <h5 class="font-weight-bold mb-0">ID:{{device.device_id}}</h5>
-                    </div>
-                </div>
-            </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <!-- Card -->
+  {% for device in devices %}
+  <div class="card" style="width: 70rem; max-width: 80vw">
+    <div class="card-body">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <p id="{{device.device_id}}" class="text-uppercase small mb-2">
+              <strong>Last Run:</strong>
+            </p>
+            <h5 class="font-weight-bold mb-0">ID:{{device.device_id}}</h5>
+          </div>
         </div>
-
-        <hr class="my-0">
-
-        <div class="card-body">
-            <canvas id="lineChart-{{device.device_id}}"></canvas>
-        </div>
-
-        <hr class="my-0">
-
-        <div class="card-body" style="border-bottom: 5px solid black;margin-bottom: 5px;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <p class="text-uppercase small mb-2"><strong>Analog Input:</strong></p>
-                        <h5 class="font-weight-bold mb-0">{{device.analog_input|last}}</h5>
-                    </div>
-                    <div class="col-md-auto">
-                        <div class="btn-group-toggle" data-toggle="buttons">
-                            <form method="post" name="form2" action="/delete_device/{{device.device_id}}"
-                                style="background-color: white; border: none;">
-                                {% csrf_token %}
-                                <button class="btn btn-danger active float-right mt-2"> Delete Device </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script>
-            var dvc = "{{ device.device_id}}";
-            var moi = "{{ device.analog_input}}";
-            moi = moi.match(/\d+(?:\.\d+)?/g).map(Number);
-            // console.log(moi);
-            var labels = []
-            var lr = " More than an hour ago"
-            for (let i = 0; i < moi.length; i++) {
-                if (moi[i] < 55) {
-                    lr = " " + String(5 * (moi.length - i - 1)) + " sec ago"
-                }
-                labels.push([i])
-            }
-            document.getElementById(dvc).innerHTML = document.getElementById(dvc).innerHTML + lr
-            var ctxL = document.getElementById("lineChart-" + dvc).getContext('2d');
-            var myLineChart = new Chart(ctxL, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: "ANALOG INPUT",
-                            data: moi,
-                            backgroundColor:
-                                ['rgba(14, 198, 14, .2)',],
-                            borderColor: ['rgba(14, 198, 14, .7)',],
-                            borderWidth: 2
-                        }
-                    ]
-                }, options:
-                    { responsive: true }
-            }); 
-        </script>
-        {% endfor %}
-        <!-- Card -->
-
+      </div>
     </div>
 
-    {% endblock content%}
+    <hr class="my-0" />
+
+    <div class="card-body">
+      <canvas id="lineChart-{{device.device_id}}"></canvas>
+    </div>
+
+    <hr class="my-0" />
+
+    <div
+      class="card-body"
+      style="border-bottom: 5px solid black; margin-bottom: 5px"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <p class="text-uppercase small mb-2">
+              <strong>Analog Input:</strong>
+            </p>
+            <h5 class="font-weight-bold mb-0">{{device.analog_input|last}}</h5>
+          </div>
+          <div class="col-md-auto">
+            <div class="btn-group-toggle" data-toggle="buttons">
+              <form
+                method="post"
+                name="form2"
+                action="/delete_device/{{device.device_id}}"
+                style="background-color: white; border: none"
+              >
+                {% csrf_token %}
+                <button class="btn btn-danger active float-right mt-2">
+                  Delete Device
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function updateChart() {
+        var dvc = "{{ device.device_id}}";
+        var moi = "{{ device.analog_input}}";
+        moi = moi.match(/\d+(?:\.\d+)?/g).map(Number);
+        // console.log(moi);
+        var labels = [];
+        var lr = " More than an hour ago";
+        for (let i = 0; i < moi.length; i++) {
+          if (moi[i] < 55) {
+            lr = " " + String(5 * (moi.length - i - 1)) + " sec ago";
+          }
+          labels.push([i]);
+        }
+        document.getElementById(dvc).innerHTML =
+          document.getElementById(dvc).innerHTML + lr;
+        var ctxL = document.getElementById("lineChart-" + dvc).getContext("2d");
+        var myLineChart = new Chart(ctxL, {
+          type: "line",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "ANALOG INPUT",
+                data: moi,
+                backgroundColor: ["rgba(14, 198, 14, .2)"],
+                borderColor: ["rgba(14, 198, 14, .7)"],
+                borderWidth: 2,
+              },
+            ],
+          },
+          options: { responsive: true },
+        });
+      }
+      setTimeout(updateChart, 1000);
+    </script>
+    {% endfor %}
+    <!-- Card -->
+  </div>
+
+  {% endblock content%}
+</div>
