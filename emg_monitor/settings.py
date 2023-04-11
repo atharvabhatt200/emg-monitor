@@ -82,7 +82,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "railway",
         "USER": "postgres",
-        "PASSWORD": "kWW4Zrn09oT0YCcmL4o5",
+        "PASSWORD": "efLmXzuR7Xjd3iTxoCYB",
         "HOST": "containers-us-west-23.railway.app",
         "PORT": "6667",
     }
@@ -137,3 +137,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Simplified static file serving.
 # https://pypi.org/project/whitenoise/
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+SECURE_SSL_REDIRECT=False
+SESSION_COOKIE_SECURE=False
+CSRF_COOKIE_SECURE=False
