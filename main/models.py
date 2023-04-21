@@ -4,7 +4,7 @@ from django.contrib.postgres.fields import ArrayField
 
 
 def get_default_array():
-    return list([0 for i in range(0, 50)])
+    return list([0 for i in range(0, 1000)])
 
 
 # Create your models here.
@@ -20,6 +20,7 @@ class Device(models.Model):
         blank=True,
         default=get_default_array,
     )
+    verdict = models.CharField(max_length=100, default="Healthy")
 
     def __str__(self) -> str:
         return self.device_id

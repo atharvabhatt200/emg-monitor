@@ -4,9 +4,15 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from sklearn.preprocessing import RobustScaler
+import numpy as np
+import requests
 
+model_url = "4d76-35-194-205-40.ngrok-free.app"
 
 # Create your views here.
+
+
 @csrf_exempt
 def new_data(request, id):
     device = get_object_or_404(Device, device_id=id)
@@ -15,7 +21,7 @@ def new_data(request, id):
     data_dict = json.loads(json_data)
 
     device.analog_input.clear()
-    
+
     # iterate over the values in the dictionary
     for value in data_dict.values():
         # do something with each value
@@ -74,10 +80,46 @@ def delete_device(request, id):
         device.save()
     return redirect("/devices")
 
+
+def test_signal(request, id):
+    if request.user.is_authenticated is False:
+        return redirect("/login")
+
+    device = get_object_or_404(Device, device_id=id)
+    analog_input = device.analog_input
+    analog_input = np.array(analog_input)
+
+    scaler = RobustScaler()
+    analog_input = scaler.fit_transform(
+        analog_input.reshape(-1, analog_input.shape[-1])).reshape(analog_input.shape)
+    analog_input = np.reshape(analog_input, (1, 1000, 1))
+
+    data = json.dumps({"signature_name": "serving_default",
+                      "instances": analog_input.tolist()})
+    # print('Data: {} ... {}'.format(data[:50], data[len(data)-52:]))
+
+    headers = {"content-type": "application/json"}
+    json_response = requests.post(
+        'http://'+model_url+'/v1/models/emg_model:predict', data=data, headers=headers)
+    predictions = json.loads(json_response.text)
+    prediction = predictions['predictions'][0][0]
+    # verdict = "hello"
+    if prediction >= 0.5:
+        verdict = "Unhealthy"
+    else:
+        verdict = "Healthy"
+
+    device.verdict = verdict
+    device.save()
+
+    return redirect("/devices")
+
+
 def get_chart_data(request, id):
     if request.user.is_authenticated is False:
         return redirect("/login")
-    devices = Device.objects.filter(user__contains=[request.user.id], device_id=id)
+    devices = Device.objects.filter(
+        user__contains=[request.user.id], device_id=id)
     # print(id)
     analog_input = devices.first().analog_input
     # print(analog_input)
