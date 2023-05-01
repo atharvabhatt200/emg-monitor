@@ -98,11 +98,11 @@ def test_signal(request, id):
 
     data = json.dumps({"signature_name": "serving_default",
                       "instances": analog_input.tolist()})
-    # print('Data: {} ... {}'.format(data[:50], data[len(data)-52:]))
+    print('Data: {} ... {}'.format(data[:50], data[len(data)-52:]))
 
     headers = {"content-type": "application/json"}
     json_response = requests.post(
-        f'http://{model_url}/v1/models/emg_model:predict', data=data, headers=headers)
+        'https://'+model_url+'/v1/models/emg_model:predict', data=data, headers=headers)
     predictions = json.loads(json_response.text)
     prediction = predictions['predictions'][0][0]
     # verdict = "hello"
