@@ -7,8 +7,9 @@ import json
 from sklearn.preprocessing import RobustScaler
 import numpy as np
 import requests
+import os
 
-model_url = "4d76-35-194-205-40.ngrok-free.app"
+model_url = os.environ.get('MODEL_HOST', None),
 
 # Create your views here.
 

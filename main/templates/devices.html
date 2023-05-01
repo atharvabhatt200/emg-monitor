@@ -4,7 +4,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   <!-- Card -->
-  {% for device in devices %}
+  {% if devices %} {% for device in devices %}
   <div class="card" style="width: 70rem; max-width: 80vw">
     <div class="card-body">
       <div class="container">
@@ -66,7 +66,7 @@
             </div>
           </div>
         </div>
-        <div class = "row">
+        <div class="row">
           <p class="text-uppercase small mb-2">
             <strong>Last Verdict:</strong>
           </p>
@@ -141,5 +141,7 @@
     <!-- Card -->
   </div>
 
-  {% endblock content%}
+  {% else %}
+  <h2 style="text-align: center; margin-top: 2em; margin-left: -2em;">No device found.</h2>
+  {% endif %} {% endblock content%}
 </div>

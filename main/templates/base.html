@@ -45,7 +45,7 @@
         </div>
       </div>
       <a href="logout" class="nav_link">
-        <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
+        <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Log Out</span>
       </a>
       {% else %}
       <div> <a href="/" class="nav_logo"> <img width="25" src="{% static 'images/icon.png' %}" alt="IM"/> <span
@@ -64,7 +64,7 @@
     </nav>
   </div>
   <!--Container Main start-->
-  <div class="height-100 bg-light">
+  <div class="height-100">
     <h4>Devices</h4>
     <div class="d-flex justify-content-center" style="margin: 50px auto 200px auto;">
       {% block content %}{% endblock %}

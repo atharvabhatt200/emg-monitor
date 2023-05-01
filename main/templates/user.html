@@ -1,21 +1,55 @@
 {% extends "base.html" %} {% block content %}
-<div class="container">
+<div class="container" style="background-color: white">
   <div class="row">
-    <div class="col-sm" style="max-width: 1200px">
-      <img
-        style="width: 100%"
-        src="https://i.ytimg.com/vi/2xgyTpsa14M/maxresdefault.jpg"
-      />
+    <div class="col-l" style="max-width: 1200px">
+      <div style="display: flex; align-items: center; justify-content: center">
+        <img
+          style="margin-top: 20px; height: 40vh"
+          src="https://i.ytimg.com/vi/2xgyTpsa14M/maxresdefault.jpg"
+        />
+      </div>
       <br /><br />
       <h3><b>About the project:</b></h3>
       <hr />
-      <h6>
-        It is the IoT Based Smart EMG Monitoring System with Nodemcu ESP8266.
-        <br /><br />
-      </h6>
+      <div style="font-size: 18px">
+        <p>
+          In this project, we aim to create a device to transmit raw
+          Electromyography (EMG) signals to a remote server using IoT (Internet
+          of Things) based technologies and detect various neuromuscular
+          diseases using Digital Signal Processing and Machine Learning.
+        </p>
 
-      <br />
-      <h3><b>Hardware Components used:</b></h3>
+        <p>
+          This project is a novel system that records and transmits
+          electromyography (EMG) signals via WiFi. The device uses advanced
+          signal processing techniques to extract the relevant features from the
+          EMG signals and transmits the data wirelessly to a cloud-based server.
+          The server then uses machine learning algorithms to perform
+          fundamental analysis and prediction on these signals.
+        </p>
+        <p>
+          The system has the potential to revolutionize the way in which medical
+          diagnoses are made. With its ability to remotely collect and analyze
+          EMG signals, the system allows for a more comprehensive diagnosis of
+          various neurological disorders, such as neuropathies, muscular
+          dystrophies, and motor neuron diseases. The use of machine learning
+          algorithms also enables the system to provide real-time monitoring and
+          feedback to patients, enabling them to manage their conditions better.
+        </p>
+        <p>
+          While the system is primarily designed for basic analysis and
+          prediction, it can also be used by qualified diagnosticians to perform
+          more in-depth analysis and provide a more accurate diagnosis. Overall,
+          this novel device has the potential to significantly improve the
+          accuracy and efficiency of medical diagnosis for neurological
+          disorders, leading to better patient outcomes and improved quality of
+          life.
+          <br />
+        </p>
+      </div>
+
+      <!-- <br /> -->
+      <!-- <h3><b>Hardware Components used:</b></h3>
       <hr />
       <div class="table-responsive">
         <table class="table table-bordered">
@@ -36,86 +70,87 @@
           </tbody>
         </table>
       </div>
-      <br />
+      <br /> -->
       <!-- <h3><b>Final Circuit:</b>
             </h3>
             <hr>
             <img style="max-width: 800px; width: 80vw;"
                 src="https://user-images.githubusercontent.com/78701055/165721822-8ce9857e-6f89-431b-96a5-bb17adb5e330.jpeg"> -->
-    </div>
-    <div class="col-sm" style="margin-top: 50px">
-      <div
-        id="profile-doc"
-        class="card sticky-top"
-        style="top: 100px; border: none"
-      >
-        <h1 id="profile">
-          PROFILE
-          <a href="edit"
-            ><i class="bx bx-edit nav_icon" style="font-size: 0.9em"></i
-          ></a>
-        </h1>
-        <hr />
-        <div class="profileContainer">
-          <ul style="list-style-type: none">
-            <li>
-              <h4 id="profile-user-name" style="font-weight: 600">
-                Name : {{name}}
-              </h4>
-            </li>
-            <li>
-              <h4 id="profile-user-username">Username: {{username}}</h4>
-            </li>
-            <li>
-              <h4 id="profile-email">Email: {{email}}</h4>
-            </li>
-            <li>
-              <h4 id="profile-devies">Devices: {{devices}}</h4>
-            </li>
-            <li>
-              <button
-                class="btn btn-primary btn-rounded mt-2"
-                onclick="add_device()"
-                style="width: 190px; text-align: center"
-              >
-                Add New Device
-              </button>
-              <a href="devices">
+      <!-- </div> -->
+      <div class="col-l" style="margin-top: 50px; margin-bottom: 50px">
+        <div
+          id="profile-doc"
+          class="card sticky-top"
+          style="top: 100px; border: none"
+        >
+          <h2 id="profile">
+            PROFILE
+            <a href="edit"
+              ><i class="bx bx-edit nav_icon" style="font-size: 0.9em"></i
+            ></a>
+          </h2>
+          <hr />
+          <div class="profileContainer">
+            <ul style="list-style-type: none">
+              <li>
+                <h4 id="profile-user-name" style="font-weight: 600">
+                  Name : {{name}}
+                </h4>
+              </li>
+              <li>
+                <h4 id="profile-user-username">Username: {{username}}</h4>
+              </li>
+              <li>
+                <h4 id="profile-email">Email: {{email}}</h4>
+              </li>
+              <li>
+                <h4 id="profile-devies">Devices: {{devices}}</h4>
+              </li>
+              <li>
                 <button
-                  class="btn btn-outline-primary btn-rounded mt-2"
+                  class="btn btn-danger btn-rounded mt-2"
+                  onclick="add_device()"
                   style="width: 190px; text-align: center"
                 >
-                  View All Devices
+                  Add New Device
                 </button>
-              </a>
-            </li>
-          </ul>
+                <a href="devices">
+                  <button
+                    class="btn btn-outline-primary btn-rounded mt-2"
+                    style="width: 190px; text-align: center"
+                  >
+                    View All Devices
+                  </button>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+      <a
+        class="btn btn-primary btn-rounded mt-2"
+        href="#profile-doc"
+        id="show-btn"
+        style="
+          width: max-content;
+          font-size: small;
+          text-align: center;
+          position: fixed;
+          bottom: 50px;
+          right: 5px;
+        "
+      >
+        &#8595; Profile
+      </a>
     </div>
-    <a
-      class="btn btn-primary btn-rounded mt-2"
-      href="#profile-doc"
-      id="show-btn"
-      style="
-        width: max-content;
-        font-size: small;
-        text-align: center;
-        position: fixed;
-        bottom: 50px;
-        right: 5px;
-      "
-    >
-      &#8595; Profile
-    </a>
-  </div>
-  <script>
-    function add_device() {
-      id = prompt("Enter Device ID");
-      if (id != null) {
-        window.location.href = "add_device/" + id;
+    <script>
+      function add_device() {
+        id = prompt("Enter Device ID");
+        if (id != null) {
+          window.location.href = "add_device/" + id;
+        }
       }
-    }
-  </script>
+    </script>
+  </div>
+  {% endblock content%}
 </div>
-{% endblock content%}
