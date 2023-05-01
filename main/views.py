@@ -102,7 +102,7 @@ def test_signal(request, id):
 
     headers = {"content-type": "application/json"}
     json_response = requests.post(
-        'http://'+model_url+'/v1/models/emg_model:predict', data=data, headers=headers)
+        f'http://{model_url}/v1/models/emg_model:predict', data=data, headers=headers)
     predictions = json.loads(json_response.text)
     prediction = predictions['predictions'][0][0]
     # verdict = "hello"
