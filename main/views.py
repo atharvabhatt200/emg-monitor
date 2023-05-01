@@ -9,7 +9,8 @@ import numpy as np
 import requests
 import os
 
-model_url = os.environ.get('MODEL_HOST'),
+model_url = os.environ.get('MODEL_HOST', ''),
+# model_url = "853e-34-125-189-40.ngrok.io"
 
 # Create your views here.
 
@@ -100,9 +101,8 @@ def test_signal(request, id):
     # print('Data: {} ... {}'.format(data[:50], data[len(data)-52:]))
 
     headers = {"content-type": "application/json"}
-    print(model_url)
     json_response = requests.post(
-        f'http://{model_url}/v1/models/emg_model:predict', data=data, headers=headers)
+        'http://'+model_url+'/v1/models/emg_model:predict', data=data, headers=headers)
     predictions = json.loads(json_response.text)
     prediction = predictions['predictions'][0][0]
     # verdict = "hello"
