@@ -9,7 +9,7 @@ import numpy as np
 import requests
 import os
 
-model_url = os.environ.get('MODEL_HOST', None),
+model_url = os.environ.get('MODEL_HOST'),
 
 # Create your views here.
 
