@@ -9,8 +9,8 @@ import numpy as np
 import requests
 import os
 
-model_url = os.environ.get('MODEL_HOST', ''),
-# model_url = "853e-34-125-189-40.ngrok.io"
+# model_url = os.environ.get('MODEL_HOST', ''),
+model_url = "853e-34-125-189-40.ngrok.io"
 
 # Create your views here.
 
@@ -21,8 +21,11 @@ def new_data(request, id):
     # device.analog_input.append(min(150, m))
     json_data = request.body.decode('utf-8')
     data_dict = json.loads(json_data)
+    
+    sampling_freq = 24000
 
-    device.analog_input.clear()
+    if len(device.analog_input) == sampling_freq:
+        device.analog_input.clear()
 
     # iterate over the values in the dictionary
     for value in data_dict.values():
@@ -101,10 +104,10 @@ def test_signal(request, id):
     # print('Data: {} ... {}'.format(data[:50], data[len(data)-52:]))
 
     headers = {"content-type": "application/json"}
-    # json_response = requests.post(
-    #     'https://'+model_url+'/v1/models/emg_model:predict', data=data, headers=headers)
     json_response = requests.post(
-        f'https://{model_url}/v1/models/emg_model:predict', data=data, headers=headers)
+        'https://'+model_url+'/v1/models/emg_model:predict', data=data, headers=headers)
+    # json_response = requests.post(
+    #     f'https://{model_url}/v1/models/emg_model:predict', data=data, headers=headers)
     predictions = json.loads(json_response.text)
     prediction = predictions['predictions'][0][0]
     # verdict = "hello"
