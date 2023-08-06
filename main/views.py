@@ -14,6 +14,7 @@ model_url = "853e-34-125-189-40.ngrok.io"
 
 # Create your views here.
 
+sampling_freq = 24000
 
 @csrf_exempt
 def new_data(request, id):
@@ -22,7 +23,6 @@ def new_data(request, id):
     json_data = request.body.decode('utf-8')
     data_dict = json.loads(json_data)
     
-    sampling_freq = 24000
 
     if len(device.analog_input) == sampling_freq:
         device.analog_input.clear()
@@ -97,7 +97,7 @@ def test_signal(request, id):
     scaler = RobustScaler()
     analog_input = scaler.fit_transform(
         analog_input.reshape(-1, analog_input.shape[-1])).reshape(analog_input.shape)
-    analog_input = np.reshape(analog_input, (1, 1000, 1))
+    analog_input = np.reshape(analog_input, (1, sampling_freq, 1))
 
     data = json.dumps({"signature_name": "serving_default",
                       "instances": analog_input.tolist()})
