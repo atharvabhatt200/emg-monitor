@@ -14,7 +14,7 @@ model_url = "853e-34-125-189-40.ngrok.io"
 
 # Create your views here.
 
-sampling_freq = 24000
+sampling_freq = 5000
 
 @csrf_exempt
 def new_data(request, id):
