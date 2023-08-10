@@ -24,7 +24,7 @@ def new_data(request, id):
     data_dict = json.loads(json_data)
     
 
-    if len(device.analog_input) == sampling_freq:
+    if len(device.analog_input) >= sampling_freq:
         device.analog_input.clear()
 
     # iterate over the values in the dictionary
