@@ -9,8 +9,8 @@ import numpy as np
 import requests
 import os
 
-# model_url = os.environ.get('MODEL_HOST', ''),
-model_url = "853e-34-125-189-40.ngrok.io"
+model_url = os.environ.get('MODEL_HOST', ''),
+# model_url = "eb7a-35-186-162-191.ngrok.io"
 
 # Create your views here.
 
