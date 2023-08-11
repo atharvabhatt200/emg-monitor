@@ -104,13 +104,13 @@ def test_signal(request, id):
     # print('Data: {} ... {}'.format(data[:50], data[len(data)-52:]))
 
     headers = {"content-type": "application/json"}
-    json_response = requests.post(
-        'https://'+model_url+'/v1/models/emg_model:predict', data=data, headers=headers)
     # json_response = requests.post(
-    #     f'https://{model_url}/v1/models/emg_model:predict', data=data, headers=headers)
+    #     'https://'+model_url+'/v1/models/emg_model:predict', data=data, headers=headers)
+    json_response = requests.post(
+        f'https://{model_url}/v1/models/emg_model:predict', data=data, headers=headers)
     predictions = json.loads(json_response.text)
     prediction = predictions['predictions'][0][0]
-    # verdict = "hello"
+    
     if prediction >= 0.5:
         verdict = "Unhealthy"
     else:
