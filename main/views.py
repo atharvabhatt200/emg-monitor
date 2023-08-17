@@ -10,7 +10,7 @@ import requests
 import os
 
 model_url = os.environ.get('MODEL_HOST', ''),
-# model_url = "eb7a-35-186-162-191.ngrok.io"
+# model_url = "bac9-34-67-80-128.ngrok.io"
 
 # Create your views here.
 
@@ -21,8 +21,7 @@ def new_data(request, id):
     device = get_object_or_404(Device, device_id=id)
     # device.analog_input.append(min(150, m))
     json_data = request.body.decode('utf-8')
-    data_dict = json.loads(json_data)
-    
+    data_dict = json.loads(json_data)  
 
     if len(device.analog_input) >= sampling_freq:
         device.analog_input.clear()
@@ -85,7 +84,7 @@ def delete_device(request, id):
         device.save()
     return redirect("/devices")
 
-
+@csrf_exempt
 def test_signal(request, id):
     if request.user.is_authenticated is False:
         return redirect("/login")
@@ -105,9 +104,10 @@ def test_signal(request, id):
 
     headers = {"content-type": "application/json"}
     # json_response = requests.post(
-    #     'https://'+model_url+'/v1/models/emg_model:predict', data=data, headers=headers)
+        # 'http://'+model_url+'/v1/models/emg_model:predict', data=data, headers=headers, verify=False)
     json_response = requests.post(
-        f'https://{model_url}/v1/models/emg_model:predict', data=data, headers=headers)
+        f'https://{model_url}/v1/models/emg_model:predict', data=data, headers=headers, verify=False)
+    # print(json_response.text)
     predictions = json.loads(json_response.text)
     prediction = predictions['predictions'][0][0]
     
