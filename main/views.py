@@ -103,7 +103,7 @@ def test_signal(request, id):
     # print('Data: {} ... {}'.format(data[:50], data[len(data)-52:]))
 
     headers = {"content-type": "application/json"}
-    url = f'http://{model_url}/v1/models/emg_model:predict'
+    url = f'http://{model_url[0]}/v1/models/emg_model:predict'
     json_response = requests.post(
         url, data=data, headers=headers, verify=False)
     # print(json_response.text)
