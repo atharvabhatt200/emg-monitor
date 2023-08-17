@@ -110,7 +110,7 @@ def test_signal(request, id):
     predictions = json.loads(json_response.text)
     prediction = predictions['predictions'][0][0]
     
-    if prediction >= 0.5:
+    if prediction >= 0.7:
         verdict = "Unhealthy"
     else:
         verdict = "Healthy"
