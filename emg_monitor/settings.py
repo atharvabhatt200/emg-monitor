@@ -79,7 +79,7 @@ APPEND_SLASH = False
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASE_URL = "postgres://emg_monitor_db_zz44_user:bI4VgbhNrktrDjNblyjbyyOZOhSfmMTK@dpg-cl0bi42s1bgc73adkuig-a.oregon-postgres.render.com/emg_monitor_db_zz44"
+DATABASE_URL = os.getenv('DATABASE_URL')
 DATABASES = {
     "default": dj_database_url.parse(DATABASE_URL)
 }
