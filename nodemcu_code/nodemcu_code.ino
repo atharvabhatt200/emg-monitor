@@ -49,6 +49,7 @@ void setup() {
 void loop() {
   // Serial.print("In loop\n");
   int ang_val = analogRead(emgPin);
+  // Serial.println(ang_val);
   // Serial.print("EMG_Val:");
   // Serial.println(ang_val);
   if(cnt == size-1) {    
@@ -59,6 +60,7 @@ void loop() {
     http.begin(client, url); 
     http.addHeader("Content-Type", "application/json");
     int httpResponseCode = http.POST(data);
+    http.end();
     Serial.println(httpResponseCode);
     data = "{";
   }
