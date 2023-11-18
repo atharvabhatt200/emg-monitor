@@ -20,7 +20,7 @@ class Device(models.Model):
         blank=True,
         default=get_default_array,
     )
-    verdict = models.CharField(max_length=100, default="Healthy")
+    verdict = models.CharField(max_length=100, default="TEST PENDING")
 
     def __str__(self) -> str:
         return self.device_id

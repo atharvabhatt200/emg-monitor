@@ -9,7 +9,8 @@ import numpy as np
 import requests
 import os
 
-model_url = os.getenv('MODEL_HOST'),
+model_url = os.getenv('MODEL_HOST')
+health_thresh = os.getenv('HEALTH_THRESH')
 # model_url = "bac9-34-67-80-128.ngrok.io"
 
 # Create your views here.
@@ -92,25 +93,8 @@ def test_signal(request, id):
     device = get_object_or_404(Device, device_id=id)
     analog_input = device.analog_input
     analog_input = np.array(analog_input)
-
-    scaler = RobustScaler()
-    analog_input = scaler.fit_transform(
-        analog_input.reshape(-1, analog_input.shape[-1])).reshape(analog_input.shape)
-    analog_input = np.reshape(analog_input, (1, sampling_freq, 1))
-
-    data = json.dumps({"signature_name": "serving_default",
-                      "instances": analog_input.tolist()})
-    # print('Data: {} ... {}'.format(data[:50], data[len(data)-52:]))
-
-    headers = {"content-type": "application/json"}
-    url = f'http://{model_url[0]}/v1/models/emg_model:predict'
-    json_response = requests.post(
-        url, data=data, headers=headers, verify=False)
-    # print(json_response.text)
-    predictions = json.loads(json_response.text)
-    prediction = predictions['predictions'][0][0]
     
-    if prediction >= 0.7:
+    if np.sum(analog_input > health_thresh) < 10:
         verdict = "Unhealthy"
     else:
         verdict = "Healthy"
