@@ -10,7 +10,8 @@ import requests
 import os
 
 model_url = os.getenv('MODEL_HOST')
-health_thresh = os.getenv('HEALTH_THRESH')
+health_thresh_low = os.getenv('HEALTH_THRESH_LOW')
+health_thresh_up = os.getenv('HEALTH_THRESH_UP')
 health_interval = os.getenv('HEALTH_INTERVAL')
 # health_thresh = "200"
 # health_interval = "10"
@@ -97,7 +98,7 @@ def test_signal(request, id):
     analog_input = device.analog_input
     analog_input = np.array(analog_input)
     
-    if np.sum(analog_input > float(health_thresh)) < float(health_interval):
+    if np.sum(analog_input > float(health_thresh_low) and analog_input < float(health_thresh_up)) < float(health_interval):
         verdict = "Unhealthy"
     else:
         verdict = "Healthy"
