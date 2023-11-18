@@ -11,6 +11,9 @@ import os
 
 model_url = os.getenv('MODEL_HOST')
 health_thresh = os.getenv('HEALTH_THRESH')
+health_interval = os.getenv('HEALTH_INTERVAL')
+# health_thresh = "200"
+# health_interval = "10"
 # model_url = "bac9-34-67-80-128.ngrok.io"
 
 # Create your views here.
@@ -94,7 +97,7 @@ def test_signal(request, id):
     analog_input = device.analog_input
     analog_input = np.array(analog_input)
     
-    if np.sum(analog_input > health_thresh) < 10:
+    if np.sum(analog_input > float(health_thresh)) < float(health_interval):
         verdict = "Unhealthy"
     else:
         verdict = "Healthy"
