@@ -98,7 +98,7 @@ def test_signal(request, id):
     analog_input = device.analog_input
     analog_input = np.array(analog_input)
     
-    if np.sum(analog_input > float(health_thresh_low) & analog_input < float(health_thresh_up)) < float(health_interval):
+    if np.sum((analog_input > float(health_thresh_low)) & (analog_input < float(health_thresh_up))) < float(health_interval):
         verdict = "Unhealthy"
     else:
         verdict = "Healthy"
